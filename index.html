@@ -54,23 +54,31 @@
 
 									<div class="control">
 										<!--<input type="text" placeholder="Your name...">-->
-                                                                     <input type="text" name="Name" id="name" placeholder="Your Name" required>
+                                                                     <input type="text" name="name" placeholder="Your Name" required />
+										<!--<input type="text" name="Name" id="name" placeholder="Your Name" required>-->
 										<i class="fa fa-user"></i>
 									</div>
 									<div class="control">
+										<!--<input type="text" placeholder="Phone number..."> -->
+                                                                       <input type="tel" name="phone" placeholder="Phone Number" required />
+										<!--<input type="tel" name="Phone" id="phone" placeholder="Phone Number" required>-->
+										<i class="fa fa-phone"></i>
+									</div>
+									<div class="control">
 										<!-- <input type="text" placeholder="Email address..."> -->
-                                                                 <input type="email" name="Email" id="email" placeholder="Your Email" required>
+                                                                 <input type="email" name="email" placeholder="Email Address" required />
+										<!--<input type="email" name="Email" id="email" placeholder="Your Email" required>-->
 										<i class="fa fa-envelope"></i>
 									</div>
 									<div class="control">
-										<!--<input type="text" placeholder="Phone number..."> -->
-                                                                  <input type="tel" name="Phone" id="phone" placeholder="Phone Number" required>
-										<i class="fa fa-phone"></i>
+										<!-- <input type="text" placeholder="Email address..."> -->
+                                                                 <textarea name="message" placeholder="Message (optional)"></textarea>
+										<i class="fa fa-envelope"></i>
 									</div>
 									<!--<input type="submit" value="Subscribe now"> -->
                                                                           <button type="submit">Submit Details</button>
 								</form>
-<script>
+<!-- <script>
   const form = document.getElementById("bookingForm");
 
   form.addEventListener("submit", function(e) {
@@ -101,7 +109,7 @@
       return;
     }
   });
-</script>
+</script> -->
 
 
 
@@ -233,6 +241,16 @@
       countdownEl.textContent = `Pre-Launch Offer ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
     setInterval(updateCountdown, 1000);
+
+    // Submit to Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzlDFE08et5lv526JPWQQJ0UOkTXAYBVQf8h6lvm1iRvhdYj87pWfYKsoMTiCYhdV3EKA/exec';
+    const form = document.forms['bookingForm'];
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => alert("Thanks! Your details have been submitted."))
+        .catch(error => alert("Oops! Something went wrong."))
+    });
 
   </script>		
 	</body>
